@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌤️ Weather Forecast</h1>
+            <a href="/" class="back-link">← Search another city</a>
+        </header>
+
+        <main>
+            <% if (weather) { %>
+                <div class="weather-card">
+                    <div class="weather-header">
+                        <h2><%= weather.city %>, <%= weather.country %></h2>
+                        <p class="last-updated">Current weather</p>
+                    </div>
+
+                    <div class="weather-main">
+                        <div class="temperature-section">
+                            <img 
+                                src="https://openweathermap.org/img/wn/<%= weather.icon %>@2x.png" 
+                                alt="<%= weather.description %>"
+                                class="weather-icon"
+                            >
+                            <div class="temperature">
+                                <span class="temp"><%= weather.temperature %>°C</span>
+                                <span class="feels-like">Feels like <%= weather.feelsLike %>°C</span>
+                            </div>
+                        </div>
+
+                        <div class="weather-description">
+                            <p class="description"><%= weather.description.charAt(0).toUpperCase() + weather.description.slice(1) %></p>
+                        </div>
+                    </div>
+
+                    <div class="weather-details">
+                        <h3>Weather Details</h3>
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <span class="label">💧 Humidity</span>
+                                <span class="value"><%= weather.humidity %>%</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">💨 Wind Speed</span>
+                                <span class="value"><%= weather.windSpeed %> m/s</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">📊 Pressure</span>
+                                <span class="value"><%= weather.pressure %> hPa</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">👁️ Visibility</span>
+                                <span class="value"><%= weather.visibility %> km</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rain-alert <%= weather.willRain ? 'will-rain' : 'no-rain' %>">
+                        <% if (weather.willRain) { %>
+                            <div class="alert-content">
+                                <span class="alert-icon">🌧️</span>
+                                <div>
+                                    <h3>Rain Alert!</h3>
+                                    <p>It's currently raining in <%= weather.city %>. Don't forget your umbrella! ☔</p>
+                                </div>
+                            </div>
+                        <% } else { %>
+                            <div class="alert-content">
+                                <span class="alert-icon">☀️</span>
+                                <div>
+                                    <h3>Clear Skies</h3>
+                                    <p>No rain in <%= weather.city %>. Perfect weather to go outside! 🌞</p>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <div class="action-buttons">
+                        <a href="/" class="btn-primary">Search Another City</a>
+                    </div>
+                </div>
+            <% } %>
+        </main>
+    </div>
+</body>
+</html>

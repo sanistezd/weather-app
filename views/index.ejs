@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌤️ Weather Forecast</h1>
+            <p>Check current weather conditions in any city</p>
+        </header>
+
+        <main>
+            <% if (error) { %>
+                <div class="error-message">
+                    <p><strong>Error:</strong> <%= error %></p>
+                </div>
+            <% } %>
+
+            <form action="/weather" method="POST" class="weather-form">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        name="city" 
+                        placeholder="Enter city name (e.g., London, Paris, Tokyo)" 
+                        required
+                        class="city-input"
+                    >
+                    <button type="submit" class="search-btn">Get Weather</button>
+                </div>
+            </form>
+
+            <div class="examples">
+                <p>Try: <span class="example-city">London</span>, <span class="example-city">Paris</span>, <span class="example-city">New York</span></p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by OpenWeatherMap API</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add click functionality to example cities
+        document.querySelectorAll('.example-city').forEach(city => {
+            city.addEventListener('click', () => {
+                document.querySelector('.city-input').value = city.textContent;
+            });
+        });
+    </script>
+</body>
+</html>
